@@ -1,4 +1,4 @@
-
+#!pip install motuclient
 import subprocess
 import json
 import xarray as xr
@@ -25,10 +25,11 @@ conda install -c conda-forge motuclient
 '''
 
 def get_pass():
-    with open('pass.json') as f:
-        data = json.load(f)
-        username=data['username']
-        passw=data['password']
+    username,passw = 'eprotsenko','a1q4q4d3s2A!'
+    #with open('pass.json') as f:
+    #    data = json.load(f)
+    #    username=data['username']
+    #    passw=data['password']
     return username,passw
 
 def download_copernicus(addr, s_id,prod_id,long_min,long_max,lat_min,lat_max,start,stop,output_path_dir,filename):
@@ -47,7 +48,11 @@ def download_copernicus(addr, s_id,prod_id,long_min,long_max,lat_min,lat_max,sta
 
 def download_ssh():
     service_id = 'SEALEVEL_ATL_PHY_HR_L3_MY_008_064-DGF'
-    product_id = 'cmems_obs-sl_atl_phy-ssh_my_j2g-l3-duacs_PT0.2S'
+    
+    product_id = "CMEMS_OBS-SL_ATL_PHY-SSH_MY_ALG-L3-DUACS_PT0.2S"
+    #'cmems_obs-sl_atl_phy-ssh_my_j2g-l3-duacs_PT0.2S'
+    #             "CMEMS_OBS-SL_ATL_PHY-SSH_MY_J3-L3-DUACS_PT0.2S"
+                
     addr = 'https://my.cmems-du.eu/motu-web/Motu'
 
     long_min = 3
@@ -57,7 +62,7 @@ def download_ssh():
     lat_max = 61.2
     
     start = "2018-12-01 12:00:00"
-    stop = "2018-12-31 12:00:00"
+    stop = "2019-12-31 12:00:00"
 
     output_path_dir = '.'
 
@@ -88,11 +93,8 @@ def download_sst():
     '''
 
     addr = 'https://nrt.cmems-du.eu/motu-web/Motu'
+    username,passw = get_pass()
 
-    with open('pass.json') as f:
-        data = json.load(f)
-        username=data['username']
-        passw=data['password']
 
 
     s_id = 'SST_GLO_SST_L4_NRT_OBSERVATIONS_010_001-TDS'
